@@ -1,4 +1,4 @@
-import { stepCounter } from "./utils";
+import { stepCounter } from "./stepCounter";
 
 export function stairsInNYears(days: number[][], years: number): number {
 
@@ -9,16 +9,15 @@ export function stairsInNYears(days: number[][], years: number): number {
     return Math.trunc(calculateSteps(days) * years);
 }
 
-export function calculateSteps(days: number[][]) {
+export function calculateSteps(days: number[][]): number {
     if (days.every((stairs, index, _days) => {
         if (index === 0) {
-            return true
+            return true;
         }
-        JSON.stringify(stairs) === JSON.stringify(_days[index - 1])
-        return stairs.length === _days[index - 1].length
+        return JSON.stringify(stairs) === JSON.stringify(_days[index - 1])
     })) {
-        return days[0].length * days[0].reduce((acc, current) => acc + current, 0)
+        return days.length * days[0].reduce((acc, current) => acc + current, 0);
     }
-    return stepCounter(days)
+    return stepCounter(days);
 }
 
